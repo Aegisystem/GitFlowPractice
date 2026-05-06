@@ -20,8 +20,7 @@ const REQUIRED_SECTIONS = [
   { level: 2, text: "Instalación" },
   { level: 2, text: "Uso" },
   { level: 2, text: "Autores" },
-  { level: 2, text: "Flujo de trabajo Git" },
-  { level: 2, text: "Evidencias" }
+  { level: 2, text: "Flujo de trabajo Git" }
 ];
 
 function git(args, options = {}) {
@@ -206,11 +205,12 @@ function validateSectionQuality(markdown) {
   const usage = sectionContent(markdown, "Uso");
   const authors = sectionContent(markdown, "Autores");
   const installationHasCommand = /```|`[^`]+`|\b(git clone|npm|node|pip|python|mvn|gradle|docker|cd)\b/i.test(installation);
+  const installationExplainsNoSetup = /no requiere instalaci[oó]n|no necesita instalaci[oó]n|sin instalaci[oó]n|no requiere configuraci[oó]n/i.test(installation);
   const usageHasExample = /```|`[^`]+`|- |\b(ejemplo|comando|ejecuta|usa|abre)\b/i.test(usage);
 
   return [
     check(installation.length >= 40, "La sección Instalación tiene contenido suficiente", "Incluye pasos concretos de instalación."),
-    check(installationHasCommand, "Instalación incluye comandos o pasos ejecutables", "Agrega al menos un comando o ejemplo entre backticks."),
+    check(installationHasCommand || installationExplainsNoSetup, "Instalación incluye comandos o explica que no requiere instalación técnica", "Agrega comandos reales o explica claramente que no requiere instalación."),
     check(usage.length >= 40, "La sección Uso explica cómo utilizar el proyecto", "Describe cómo ejecutar o probar el proyecto."),
     check(usageHasExample, "Uso incluye ejemplo, comando o instrucción concreta", "Agrega un ejemplo de uso o comando."),
     check(authors.length >= 10 && !/reemplazar/i.test(authors), "Autores identifica a quienes trabajan el proyecto", "Reemplaza el texto pendiente por nombres reales.")
@@ -219,7 +219,6 @@ function validateSectionQuality(markdown) {
 
 function validateFinalReadme(markdown) {
   const flow = sectionContent(markdown, "Flujo de trabajo Git");
-  const evidence = sectionContent(markdown, "Evidencias");
 
   return [
     ...validateReadmeStructure(markdown),
@@ -228,8 +227,7 @@ function validateFinalReadme(markdown) {
     check(/feature\//i.test(flow), "Flujo de trabajo Git menciona ramas feature/", "Incluye las ramas feature usadas."),
     check(/release\/v?1\.0\.0|release\//i.test(flow), "Flujo de trabajo Git menciona release", "Describe la rama release/v1.0.0."),
     check(/hotfix\//i.test(flow), "Flujo de trabajo Git menciona hotfix", "Describe la rama hotfix/readme-typo."),
-    check(/v1\.0\.0|tag/i.test(flow + "\n" + evidence), "El README menciona el tag v1.0.0", "Agrega evidencia o explicación del tag final."),
-    check(/https?:\/\/|!\[|pull request|issue|workflow|captura|tag/i.test(evidence), "Evidencias contiene enlaces, capturas o referencias verificables", "Agrega links o capturas de ramas, PRs, workflows y tag.")
+    check(/v1\.0\.0|tag/i.test(flow), "El README menciona el tag v1.0.0", "Explica el tag final dentro del flujo de trabajo Git.")
   ];
 }
 
@@ -304,6 +302,24 @@ async function evaluateMission(mission, issue, context) {
 
     case 6: {
       const checks = [
+        check(refName === "feature/documentacion-extra", "El avance ocurre en feature/documentacion-extra", "Trabaja desde feature/documentacion-extra."),
+        check(branchExists(branches, "feature/documentacion-extra"), "La rama feature/documentacion-extra existe", "Crea y publica la rama feature/documentacion-extra.")
+      ];
+
+      return result({ mission, passed: checks.every((item) => item.ok), checks });
+    }
+
+    case 7: {
+      const checks = [
+        check(refName === "feature/documentacion-extra", "El avance ocurre en feature/documentacion-extra", "Recupera el stash desde feature/documentacion-extra."),
+        check(readmeWasTouched(issue, payload), "README.md fue modificado después de abrir esta misión", "Recupera el stash, conserva el cambio útil y publica un commit.")
+      ];
+
+      return result({ mission, passed: checks.every((item) => item.ok), checks });
+    }
+
+    case 8: {
+      const checks = [
         check(refName === "feature/documentacion-extra", "El avance ocurre en feature/documentacion-extra", "Haz commit y push desde feature/documentacion-extra."),
         check(readmeWasTouched(issue, payload), "README.md fue modificado después de abrir esta misión", "Publica un commit nuevo con mejoras de documentación."),
         ...validateSectionQuality(readme)
@@ -312,7 +328,7 @@ async function evaluateMission(mission, issue, context) {
       return result({ mission, passed: checks.every((item) => item.ok), checks });
     }
 
-    case 7: {
+    case 9: {
       const merged = await hasMergedPull(context, "feature/documentacion-extra", "develop");
       const currentPull = payload?.pull_request;
       const correctPull = currentPull?.head?.ref === "feature/documentacion-extra" && currentPull?.base?.ref === "develop";
@@ -324,7 +340,7 @@ async function evaluateMission(mission, issue, context) {
       return result({ mission, passed: checks.every((item) => item.ok), checks });
     }
 
-    case 8:
+    case 10:
       return result({
         mission,
         passed: branchExists(branches, "release/v1.0.0"),
@@ -333,7 +349,7 @@ async function evaluateMission(mission, issue, context) {
         ]
       });
 
-    case 9: {
+    case 11: {
       const checks = [
         check(refName === "release/v1.0.0", "El avance ocurre en release/v1.0.0", "Haz commit y push desde release/v1.0.0."),
         check(readmeWasTouched(issue, payload), "README.md fue ajustado después de abrir esta misión", "Publica un commit nuevo con los ajustes finales."),
@@ -343,7 +359,7 @@ async function evaluateMission(mission, issue, context) {
       return result({ mission, passed: checks.every((item) => item.ok), checks });
     }
 
-    case 10: {
+    case 12: {
       const merged = await hasMergedPull(context, "release/v1.0.0", "main");
       const currentPull = payload?.pull_request;
       const correctPull = currentPull?.head?.ref === "release/v1.0.0" && currentPull?.base?.ref === "main";
@@ -355,7 +371,7 @@ async function evaluateMission(mission, issue, context) {
       return result({ mission, passed: checks.every((item) => item.ok), checks });
     }
 
-    case 11: {
+    case 13: {
       const tagExists = git(["tag", "--list", "v1.0.0"], { allowFailure: true }) === "v1.0.0"
         || (payload?.ref_type === "tag" && payload?.ref === "v1.0.0");
 
@@ -368,7 +384,7 @@ async function evaluateMission(mission, issue, context) {
       });
     }
 
-    case 12:
+    case 14:
       return result({
         mission,
         passed: branchExists(branches, "hotfix/readme-typo"),
@@ -377,7 +393,7 @@ async function evaluateMission(mission, issue, context) {
         ]
       });
 
-    case 13: {
+    case 15: {
       const touched = readmeWasTouched(issue, payload);
       const checks = [
         check(refName === "hotfix/readme-typo", "El avance ocurre en hotfix/readme-typo", "Haz commit y push desde hotfix/readme-typo."),
@@ -388,7 +404,7 @@ async function evaluateMission(mission, issue, context) {
       return result({ mission, passed: checks.every((item) => item.ok), checks });
     }
 
-    case 14: {
+    case 16: {
       const mainMerged = await hasMergedPull(context, "hotfix/readme-typo", "main");
       const developMerged = await hasMergedPull(context, "hotfix/readme-typo", "develop");
       const checks = [
@@ -404,7 +420,7 @@ async function evaluateMission(mission, issue, context) {
         mission,
         passed: false,
         checks: [
-          check(false, "No hay una validación automática definida para esta misión", "Cierra la misión manualmente cuando tu docente lo indique.")
+          check(false, "No hay una validación automática definida para esta misión", "Espera a que el docente ajuste la validación automática.")
         ]
       });
   }
@@ -479,26 +495,31 @@ function targetMissionIds(payload, openIssues) {
         ["develop", 1],
         ["feature/readme-base", 2],
         ["feature/documentacion-extra", 5],
-        ["release/v1.0.0", 8],
-        ["hotfix/readme-typo", 12]
+        ["release/v1.0.0", 10],
+        ["hotfix/readme-typo", 14]
       ]);
       return branchToMission.has(payload.ref) ? [branchToMission.get(payload.ref)] : [];
     }
 
     if (payload?.ref_type === "tag" && payload?.ref === "v1.0.0") {
-      return [11];
+      return [13];
     }
   }
 
   if (eventName() === "push") {
     const branch = currentRefName(payload);
-    const branchToMission = new Map([
-      ["feature/readme-base", 3],
-      ["feature/documentacion-extra", 6],
-      ["release/v1.0.0", 9],
-      ["hotfix/readme-typo", 13]
-    ]);
-    return branchToMission.has(branch) ? [branchToMission.get(branch)] : [];
+    if (branch === "feature/readme-base") {
+      return [3];
+    }
+    if (branch === "feature/documentacion-extra") {
+      return [6, 7, 8];
+    }
+    if (branch === "release/v1.0.0") {
+      return [11];
+    }
+    if (branch === "hotfix/readme-typo") {
+      return [15];
+    }
   }
 
   if (eventName() === "pull_request") {
@@ -509,13 +530,13 @@ function targetMissionIds(payload, openIssues) {
       return [4];
     }
     if (head === "feature/documentacion-extra" && base === "develop") {
-      return [7];
+      return [9];
     }
     if (head === "release/v1.0.0" && base === "main") {
-      return [10];
+      return [12];
     }
     if (head === "hotfix/readme-typo" && ["main", "develop"].includes(base)) {
-      return [14];
+      return [16];
     }
   }
 

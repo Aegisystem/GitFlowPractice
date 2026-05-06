@@ -6,8 +6,7 @@ const requiredSections = [
   { level: 2, text: "Instalación" },
   { level: 2, text: "Uso" },
   { level: 2, text: "Autores" },
-  { level: 2, text: "Flujo de trabajo Git" },
-  { level: 2, text: "Evidencias" }
+  { level: 2, text: "Flujo de trabajo Git" }
 ];
 
 function stripFencedCodeBlocks(markdown) {

@@ -48,7 +48,7 @@ Cuando una misión se pueda validar automáticamente, el issue recibirá un come
 - qué puntos ya cumplen;
 - qué falta corregir si algo no pasa.
 
-Si todo está correcto, el workflow cerrará el issue y creará la siguiente misión. Si tu docente pide revisión manual, también puedes cerrar issues manualmente; el workflow **Issue progresivo** creará la siguiente misión como respaldo.
+Si todo está correcto, el workflow cerrará el issue y creará la siguiente misión.
 
 ## Crear ramas
 
@@ -132,18 +132,6 @@ Después de recuperar los cambios, revísalos, haz commit y publica la rama cuan
 4. Escribe una descripción clara.
 5. Espera que los workflows pasen antes de fusionar.
 
-## Cerrar issues con palabras clave
-
-En la descripción del Pull Request puedes escribir:
-
-```text
-Closes #1
-```
-
-Reemplaza `#1` por el número real del issue. GitHub cerrará el issue automáticamente cuando el Pull Request se fusione hacia la rama principal del repositorio. En Pull Requests hacia `develop`, el workflow **Validar progreso de misiones** revisará el PR y cerrará la misión si corresponde.
-
-También puedes usar `Fixes #1` o `Resolves #1`.
-
 ## Crear tags
 
 Cuando la versión final esté en `main`, crea el tag:
@@ -159,7 +147,7 @@ Verifica el tag en GitHub en la sección **Tags** o **Releases**.
 
 ## Validar el README
 
-El README debe tener estas secciones como encabezados reales. Los workflows revisarán la estructura y, en misiones avanzadas, también comentarán si falta contenido mínimo en instalación, uso, autores, flujo Git o evidencias:
+El README debe tener estas secciones como encabezados reales. Los workflows revisarán la estructura y, en misiones avanzadas, también comentarán si falta contenido mínimo en instalación, uso, autores o flujo Git:
 
 ```markdown
 # Nombre del Proyecto
@@ -168,7 +156,6 @@ El README debe tener estas secciones como encabezados reales. Los workflows revi
 ## Uso
 ## Autores
 ## Flujo de trabajo Git
-## Evidencias
 ```
 
 En la misión 8, completa `Instalación`, `Uso` y `Autores` según tu proyecto de curso. No inventes comandos ni dependencias si tu proyecto no los necesita.
@@ -182,16 +169,3 @@ Puedes validar localmente con:
 ```bash
 npm run validate:readme
 ```
-
-## Evidencias para entregar
-
-Entrega los siguientes elementos según indique tu docente:
-
-- URL del fork.
-- URL de los Pull Requests.
-- URL o captura de los issues cerrados.
-- Captura de los workflows ejecutados.
-- Captura o enlace de las ramas creadas.
-- Evidencia del tag `v1.0.0`.
-- README final con instalación, uso, autores, flujo Git y evidencias.
-- Comentarios automáticos de los issues, especialmente cuando indiquen correcciones realizadas.

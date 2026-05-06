@@ -18,7 +18,7 @@ Describe qué ocurrió y en qué paso de la práctica estabas.
 Explica qué esperabas que ocurriera.
 
 ## Resultado obtenido
-Explica qué ocurrió realmente. Puedes adjuntar capturas o enlaces.
+Explica qué ocurrió realmente.
 
 ## Contexto adicional
 Incluye rama, Pull Request, workflow o comando relacionado si aplica.

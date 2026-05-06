@@ -131,11 +131,11 @@ function main() {
 
   for (const prefix of requiredPrefixes) {
     if (hasPrefixEvidence(branches, prefix, historyText)) {
-      console.log(`[OK] Hay evidencia de ramas con prefijo ${prefix}.`);
+      console.log(`[OK] Hay registro de ramas con prefijo ${prefix}.`);
     } else if (strictFinalValidation) {
-      failures.push(`No se encontró evidencia de ramas con prefijo ${prefix}.`);
+      failures.push(`No se encontró registro de ramas con prefijo ${prefix}.`);
     } else {
-      warnings.push(`Aún no hay evidencia de ramas con prefijo ${prefix}. Esto puede ser normal en etapas tempranas.`);
+      warnings.push(`Aún no hay registro de ramas con prefijo ${prefix}. Esto puede ser normal en etapas tempranas.`);
     }
   }
 

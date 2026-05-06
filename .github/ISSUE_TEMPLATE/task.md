@@ -16,6 +16,3 @@ Describe qué debe lograrse.
 
 ## Criterio de aceptacion
 Indica cómo se verificará que la tarea está completa.
-
-## Evidencia
-Agrega enlaces, capturas o comandos relevantes.
