@@ -135,7 +135,7 @@ function main() {
     } else if (strictFinalValidation) {
       failures.push(`No se encontró evidencia de ramas con prefijo ${prefix}.`);
     } else {
-      warnings.push(`Aun no hay evidencia de ramas con prefijo ${prefix}. Esto puede ser normal en etapas tempranas.`);
+      warnings.push(`Aún no hay evidencia de ramas con prefijo ${prefix}. Esto puede ser normal en etapas tempranas.`);
     }
   }
 

@@ -4,8 +4,10 @@ export const missions = [
   {
     id: 1,
     title: "Crear rama develop",
+    summary: "Crearás la rama de integración donde se acumulan los cambios antes de preparar una versión.",
+    why: "En Git Flow, `develop` protege a `main` y permite integrar trabajo en curso sin afectar la versión estable.",
     body: `## Objetivo
-Crear la rama principal de integracion llamada \`develop\`.
+Crear la rama principal de integración llamada \`develop\`.
 
 ## Pasos sugeridos
 - Sincroniza tu fork con \`main\`.
@@ -21,6 +23,8 @@ Incluye una captura o enlace donde se vea la rama \`develop\`.`
   {
     id: 2,
     title: "Crear rama feature/readme-base",
+    summary: "Crearás una rama de feature para trabajar el README sin tocar directamente `develop`.",
+    why: "Las ramas `feature/` aíslan cambios pequeños y facilitan revisarlos mediante Pull Requests.",
     body: `## Objetivo
 Crear una rama de trabajo para iniciar el README del proyecto.
 
@@ -36,6 +40,8 @@ Cierra este issue cuando la rama \`feature/readme-base\` exista en GitHub.`
   {
     id: 3,
     title: "Completar estructura básica del README",
+    summary: "Agregarás la estructura mínima del README que documentará el proyecto durante la práctica.",
+    why: "Un README bien organizado deja evidencia del trabajo y ayuda a que otras personas entiendan el repositorio.",
     body: `## Objetivo
 Crear la estructura inicial del README del proyecto del estudiante.
 
@@ -43,13 +49,13 @@ Crear la estructura inicial del README del proyecto del estudiante.
 - Edita \`README.md\` desde la rama \`feature/readme-base\`.
 - Agrega estas secciones como encabezados reales, no dentro de bloques de código:
   - \`# Nombre del Proyecto\`
-      - \`## Descripción\`
-      - \`## Instalación\`
+  - \`## Descripción\`
+  - \`## Instalación\`
   - \`## Uso\`
   - \`## Autores\`
   - \`## Flujo de trabajo Git\`
   - \`## Evidencias\`
-- Puedes dejar texto breve o pendiente en algunas secciones; se completaran mas adelante.
+- Puedes dejar texto breve o pendiente en algunas secciones; se completarán más adelante.
 - Haz commit y push de tus cambios.
 
 ## Criterio de cierre
@@ -58,22 +64,26 @@ Cierra este issue cuando el README tenga todas las secciones requeridas.`
   {
     id: 4,
     title: "Crear Pull Request de feature/readme-base hacia develop",
+    summary: "Abrirás y fusionarás un Pull Request para integrar el README base en `develop`.",
+    why: "El Pull Request deja trazabilidad, permite revisión y evita integrar cambios sin una conversación mínima.",
     body: `## Objetivo
 Integrar la primera versión del README a \`develop\` usando un Pull Request.
 
 ## Pasos sugeridos
 - Abre un Pull Request desde \`feature/readme-base\` hacia \`develop\`.
-- En la descripción del Pull Request escribe \`Closes #NUMERO_DEL_ISSUE\` usando el número de este issue.
+- En la descripción del Pull Request puedes escribir \`Closes #NUMERO_DEL_ISSUE\` usando el número de este issue.
 - Revisa que el workflow de README pase correctamente.
 - Solicita revisión si tu docente lo requiere.
 - Fusiona el Pull Request cuando esté listo.
 
 ## Criterio de cierre
-Este issue debe cerrarse automáticamente al fusionar el Pull Request si usaste la palabra clave \`Closes\`.`
+El workflow de progreso cerrará este issue cuando detecte el Pull Request fusionado hacia \`develop\`.`
   },
   {
     id: 5,
     title: "Crear rama feature/documentacion-extra",
+    summary: "Crearás una segunda rama de feature para ampliar la documentación del proyecto.",
+    why: "Separar mejoras en ramas pequeñas hace más claro qué cambia y por qué se integra.",
     body: `## Objetivo
 Crear una segunda rama de feature para mejorar la documentación.
 
@@ -88,7 +98,9 @@ Cierra este issue cuando la rama \`feature/documentacion-extra\` exista en GitHu
   },
   {
     id: 6,
-    title: "Mejorar README con instalacion, uso y autores",
+    title: "Mejorar README con instalación, uso y autores",
+    summary: "Completarás secciones prácticas del README para que el proyecto sea entendible y ejecutable.",
+    why: "La documentación útil no solo enumera títulos: guía instalación, uso y responsabilidades del equipo.",
     body: `## Objetivo
 Completar el README para que una persona externa pueda entender y ejecutar el proyecto.
 
@@ -104,21 +116,25 @@ Cierra este issue cuando el README tenga contenido suficiente en las secciones s
   {
     id: 7,
     title: "Crear Pull Request hacia develop",
+    summary: "Integrarás la documentación extra a `develop` por medio de un Pull Request.",
+    why: "La integración mediante PR permite verificar que la mejora documental no rompa reglas del repositorio.",
     body: `## Objetivo
-Integrar la documentacion extra a la rama \`develop\`.
+Integrar la documentación extra a la rama \`develop\`.
 
 ## Pasos sugeridos
 - Abre un Pull Request desde \`feature/documentacion-extra\` hacia \`develop\`.
-- Usa \`Closes #NUMERO_DEL_ISSUE\` en la descripción del Pull Request.
+- Puedes usar \`Closes #NUMERO_DEL_ISSUE\` en la descripción del Pull Request.
 - Espera que pasen las validaciones.
 - Fusiona el Pull Request cuando esté aprobado.
 
 ## Criterio de cierre
-Este issue debe cerrarse al fusionar el Pull Request.`
+El workflow de progreso cerrará este issue cuando detecte el Pull Request fusionado hacia \`develop\`.`
   },
   {
     id: 8,
     title: "Crear rama release/v1.0.0",
+    summary: "Crearás una rama de release para preparar la primera versión estable.",
+    why: "Una rama `release/` congela la versión candidata y permite ajustes finales antes de llegar a `main`.",
     body: `## Objetivo
 Preparar una rama de release para la primera versión estable.
 
@@ -134,22 +150,26 @@ Cierra este issue cuando la rama \`release/v1.0.0\` exista en GitHub.`
   {
     id: 9,
     title: "Ajustar README final para release",
+    summary: "Revisarás el README final antes de llevar la versión candidata a `main`.",
+    why: "La release debe salir con documentación consistente, evidencias y una explicación clara del flujo usado.",
     body: `## Objetivo
 Hacer una revisión final del README antes de liberar la versión 1.0.0.
 
 ## Pasos sugeridos
 - Trabaja en \`release/v1.0.0\`.
-- Revisa ortografia, claridad y consistencia.
+- Revisa ortografía, claridad y consistencia.
 - Agrega en \`Evidencias\` los enlaces o capturas relevantes de la práctica.
 - Ejecuta manualmente el workflow de validación de README si lo necesitas.
 - Haz commit y push.
 
 ## Criterio de cierre
-Cierra este issue cuando el README este listo para ser integrado a \`main\`.`
+Cierra este issue cuando el README esté listo para ser integrado a \`main\`.`
   },
   {
     id: 10,
     title: "Crear Pull Request de release/v1.0.0 hacia main",
+    summary: "Fusionarás la rama de release hacia `main` para publicar la versión estable.",
+    why: "`main` representa el estado listo para entregar; por eso solo debe recibir releases o hotfixes controlados.",
     body: `## Objetivo
 Integrar la versión candidata a la rama principal \`main\`.
 
@@ -165,6 +185,8 @@ Este issue debe cerrarse al fusionar el Pull Request.`
   {
     id: 11,
     title: "Crear tag v1.0.0",
+    summary: "Crearás un tag para identificar exactamente el commit de la versión 1.0.0.",
+    why: "Los tags permiten ubicar y auditar versiones publicadas sin depender solo del historial de commits.",
     body: `## Objetivo
 Marcar la primera versión estable del proyecto con un tag.
 
@@ -180,6 +202,8 @@ Cierra este issue cuando el tag \`v1.0.0\` exista en GitHub.`
   {
     id: 12,
     title: "Crear rama hotfix/readme-typo",
+    summary: "Crearás una rama de hotfix desde `main` para simular una corrección urgente.",
+    why: "Los hotfixes permiten corregir producción sin esperar el ciclo normal de features y releases.",
     body: `## Objetivo
 Simular una corrección urgente sobre la versión publicada.
 
@@ -195,12 +219,14 @@ Cierra este issue cuando la rama \`hotfix/readme-typo\` exista en GitHub.`
   {
     id: 13,
     title: "Corregir un error menor del README",
+    summary: "Harás una corrección pequeña y controlada en el README desde la rama de hotfix.",
+    why: "Un hotfix debe ser puntual; si crece demasiado, deja de ser una corrección urgente y se vuelve otro tipo de cambio.",
     body: `## Objetivo
 Aplicar una corrección pequeña en el README desde una rama de hotfix.
 
 ## Pasos sugeridos
 - Trabaja en \`hotfix/readme-typo\`.
-- Corrige una falta de ortografia, una palabra repetida o un detalle menor.
+- Corrige una falta de ortografía, una palabra repetida o un detalle menor.
 - Haz commit y push.
 
 ## Criterio de cierre
@@ -209,6 +235,8 @@ Cierra este issue cuando la corrección esté publicada en la rama de hotfix.`
   {
     id: 14,
     title: "Hacer Pull Request del hotfix hacia main y develop",
+    summary: "Integrarás el hotfix en `main` y también en `develop` para mantener ambas líneas sincronizadas.",
+    why: "Si el hotfix solo queda en `main`, el error puede reaparecer cuando `develop` vuelva a integrarse.",
     body: `## Objetivo
 Integrar el hotfix en \`main\` y también en \`develop\` para que ambas ramas queden consistentes.
 
@@ -238,7 +266,14 @@ export function missionIssueTitle(mission) {
 export function missionIssueBody(mission) {
   return `${missionMarker(mission.id)}
 
+## Resumen rápido
+- **Qué harás:** ${mission.summary}
+- **Por qué importa:** ${mission.why}
+
 ${mission.body}
+
+## Seguimiento automático
+Cuando avances en esta misión, el workflow **Validar progreso de misiones** intentará revisar la evidencia. Si cumple los criterios verificables, comentará el resultado, cerrará este issue y creará la siguiente misión. Si no cumple todavía, dejará una checklist breve con lo que falta.
 
 ---
 Práctica guiada de Git Flow. Identificador interno: misión ${mission.id}.`;
