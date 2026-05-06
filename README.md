@@ -38,7 +38,7 @@ Para iniciar la práctica en GitHub:
 3. Ejecuta el workflow con **Run workflow**.
 4. Abre la pestaña **Issues** y sigue la primera misión.
 
-Cada vez que cierres una misión, el workflow **Issue progresivo** creará la siguiente, siempre que no exista ya.
+Cada vez que completes una actividad verificable, el workflow **Validar progreso de misiones** comentará el issue activo con una revisión breve. Si todo cumple, cerrará la misión y creará la siguiente. Si cierras una misión manualmente, **Issue progresivo** seguirá funcionando como respaldo.
 
 ## Autores
 
@@ -66,6 +66,7 @@ Reglas de trabajo:
 - Usar Pull Requests para integrar cambios.
 - Cerrar issues desde Pull Requests con palabras clave como `Closes #1`.
 - Mantener evidencias de ramas, PRs, workflows y tag final.
+- Revisar los comentarios automáticos de cada issue para saber qué se validó, por qué importa y qué falta.
 
 Estructura esperada del README del estudiante:
 

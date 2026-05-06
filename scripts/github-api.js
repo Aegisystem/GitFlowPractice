@@ -88,3 +88,86 @@ export async function createMissionIssue(api, mission) {
 
   return data;
 }
+
+export async function closeIssue(api, issueNumber, reason = "completed") {
+  const { data } = await api.request("PATCH", `/issues/${issueNumber}`, {
+    body: {
+      state: "closed",
+      state_reason: reason
+    }
+  });
+
+  return data;
+}
+
+export async function reopenIssue(api, issueNumber) {
+  const { data } = await api.request("PATCH", `/issues/${issueNumber}`, {
+    body: {
+      state: "open"
+    }
+  });
+
+  return data;
+}
+
+export async function createIssueComment(api, issueNumber, body) {
+  const { data } = await api.request("POST", `/issues/${issueNumber}/comments`, {
+    body: { body }
+  });
+
+  return data;
+}
+
+export async function listIssueComments(api, issueNumber) {
+  const comments = [];
+
+  for (let page = 1; page <= 10; page += 1) {
+    const { data, headers } = await api.request("GET", `/issues/${issueNumber}/comments?per_page=100&page=${page}`);
+    comments.push(...data);
+
+    const link = headers.get("link") || "";
+    if (!link.includes('rel="next"')) {
+      break;
+    }
+  }
+
+  return comments;
+}
+
+export async function updateIssueComment(api, commentId, body) {
+  const { data } = await api.request("PATCH", `/issues/comments/${commentId}`, {
+    body: { body }
+  });
+
+  return data;
+}
+
+export async function upsertIssueComment(api, issueNumber, marker, body) {
+  const comments = await listIssueComments(api, issueNumber);
+  const previous = comments.find((comment) => (comment.body || "").includes(marker));
+  const bodyWithMarker = `${marker}
+
+${body}`;
+
+  if (previous) {
+    return updateIssueComment(api, previous.id, bodyWithMarker);
+  }
+
+  return createIssueComment(api, issueNumber, bodyWithMarker);
+}
+
+export async function listClosedPullRequests(api) {
+  const pulls = [];
+
+  for (let page = 1; page <= 10; page += 1) {
+    const { data, headers } = await api.request("GET", `/pulls?state=closed&per_page=100&page=${page}`);
+    pulls.push(...data);
+
+    const link = headers.get("link") || "";
+    if (!link.includes('rel="next"')) {
+      break;
+    }
+  }
+
+  return pulls;
+}

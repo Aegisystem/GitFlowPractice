@@ -10,6 +10,7 @@
   "scripts": {
     "create:initial-issues": "node scripts/create-initial-issues.js",
     "create:next-issue": "node scripts/create-next-issue.js",
+    "validate:progress": "node scripts/validate-progress.js",
     "validate:readme": "node scripts/validate-readme.js",
     "validate:gitflow": "node scripts/validate-gitflow.js"
   }

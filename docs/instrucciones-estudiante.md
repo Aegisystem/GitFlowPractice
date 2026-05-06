@@ -35,7 +35,16 @@ Si Git muestra que estás en `main` y el directorio está limpio, puedes comenza
 4. Haz clic en **Run workflow**.
 5. Revisa la pestaña **Issues**.
 
-El primer issue aparecerá automáticamente. Cuando cierres una misión, se creará la siguiente.
+El primer issue aparecerá automáticamente. A medida que avances, el workflow **Validar progreso de misiones** revisará acciones como crear ramas, hacer push, abrir Pull Requests y crear tags.
+
+Cuando una misión se pueda validar automáticamente, el issue recibirá un comentario con:
+
+- qué estás practicando;
+- por qué esa acción importa dentro de Git Flow;
+- qué puntos ya cumplen;
+- qué falta corregir si algo no pasa.
+
+Si todo está correcto, el workflow cerrará el issue y creará la siguiente misión. Si tu docente pide revisión manual, también puedes cerrar issues manualmente; el workflow **Issue progresivo** creará la siguiente misión como respaldo.
 
 ## Crear ramas
 
@@ -105,7 +114,7 @@ En la descripción del Pull Request puedes escribir:
 Closes #1
 ```
 
-Reemplaza `#1` por el número real del issue. GitHub cerrará el issue automáticamente cuando el Pull Request se fusione.
+Reemplaza `#1` por el número real del issue. GitHub cerrará el issue automáticamente cuando el Pull Request se fusione hacia la rama principal del repositorio. En Pull Requests hacia `develop`, el workflow **Validar progreso de misiones** revisará el PR y cerrará la misión si corresponde.
 
 También puedes usar `Fixes #1` o `Resolves #1`.
 
@@ -124,7 +133,7 @@ Verifica el tag en GitHub en la sección **Tags** o **Releases**.
 
 ## Validar el README
 
-El README debe tener estas secciones como encabezados reales:
+El README debe tener estas secciones como encabezados reales. Los workflows revisarán la estructura y, en misiones avanzadas, también comentarán si falta contenido mínimo en instalación, uso, autores, flujo Git o evidencias:
 
 ```markdown
 # Nombre del Proyecto
@@ -153,3 +162,4 @@ Entrega los siguientes elementos según indique tu docente:
 - Captura o enlace de las ramas creadas.
 - Evidencia del tag `v1.0.0`.
 - README final con instalación, uso, autores, flujo Git y evidencias.
+- Comentarios automáticos de los issues, especialmente cuando indiquen correcciones realizadas.

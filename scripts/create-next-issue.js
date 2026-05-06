@@ -1,4 +1,4 @@
-import { createMissionIssue, findMissionIssue, getRepositoryFromEnv, getTokenFromEnv, GitHubApi, listAllIssues } from "./github-api.js";
+import { createMissionIssue, findMissionIssue, getRepositoryFromEnv, getTokenFromEnv, GitHubApi, listAllIssues, reopenIssue } from "./github-api.js";
 import { extractMissionId, getNextMission } from "./practice-missions.js";
 import { readFileSync } from "node:fs";
 
@@ -76,6 +76,12 @@ async function main() {
   const duplicate = findMissionIssue(existingIssues, nextMission);
 
   if (duplicate) {
+    if (duplicate.state === "closed") {
+      await reopenIssue(api, duplicate.number);
+      console.log(`La misión ${nextMission.id} ya existía como issue #${duplicate.number}, pero estaba cerrada. Se reabrió.`);
+      return;
+    }
+
     console.log(`La misión ${nextMission.id} ya existe como issue #${duplicate.number}. No se duplica.`);
     return;
   }
