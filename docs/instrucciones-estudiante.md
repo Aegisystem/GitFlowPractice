@@ -29,7 +29,11 @@ Si Git muestra que estás en `main` y el directorio está limpio, puedes comenza
 
 ## Ejecutar el workflow Iniciar práctica
 
-1. En GitHub, entra a tu fork.
+Cuando creas el repositorio desde el template, GitHub genera un commit inicial en `main`. Ese `push` inicial intenta ejecutar automáticamente el workflow **Iniciar práctica** para crear el primer issue.
+
+Si el primer issue no aparece después de unos minutos, ejecútalo manualmente:
+
+1. En GitHub, entra a tu fork o copia del template.
 2. Abre la pestaña **Actions**.
 3. Selecciona **Iniciar práctica**.
 4. Haz clic en **Run workflow**.
