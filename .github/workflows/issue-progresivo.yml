@@ -1,4 +1,4 @@
-name: Issue progresivo
+name: Proteger cierre de misiones
 
 on:
   issues:
@@ -11,9 +11,8 @@ permissions:
   issues: write
 
 jobs:
-  crear-siguiente-issue:
-    name: Crear siguiente misión
-    if: github.event.action == 'closed'
+  reabrir-cierre-manual:
+    name: Reabrir cierres manuales
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +24,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Crear siguiente issue
-        run: npm run create:next-issue
+      - name: Proteger cierre automático
+        run: npm run guard:manual-close
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

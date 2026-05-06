@@ -29,6 +29,8 @@ npm run validate:gitflow
 
 El estudiante debe seguir los issues creados automáticamente en GitHub.
 
+Los issues de misión no se cierran manualmente. El workflow **Validar progreso de misiones** los cierra cuando detecta que el criterio se cumplió; si alguien los cierra desde la interfaz de GitHub, **Proteger cierre de misiones** los reabre.
+
 El flujo general es:
 
 1. Crear `develop`.

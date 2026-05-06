@@ -284,7 +284,7 @@ Integrar la versión candidata a la rama principal \`main\`.
 - Fusiona el Pull Request cuando esté aprobado.
 
 ## Criterio de cierre
-Este issue debe cerrarse al fusionar el Pull Request.`
+El workflow de progreso cerrará este issue cuando detecte el Pull Request de release fusionado hacia \`main\`.`
   },
   {
     id: 13,
@@ -377,6 +377,8 @@ ${mission.body}
 
 ## Seguimiento automático
 Cuando avances en esta misión, el workflow **Validar progreso de misiones** intentará revisar los criterios verificables. Si cumple, comentará el resultado, cerrará este issue y creará la siguiente misión. Si no cumple todavía, dejará una checklist breve con lo que falta.
+
+No cierres este issue manualmente. Si se cierra desde la interfaz de GitHub o desde un Pull Request, el workflow **Proteger cierre de misiones** lo reabrirá.
 
 ---
 Práctica guiada de Git Flow. Identificador interno: misión ${mission.id}.`;

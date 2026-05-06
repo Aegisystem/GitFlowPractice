@@ -50,6 +50,8 @@ Cuando una misión se pueda validar automáticamente, el issue recibirá un come
 
 Si todo está correcto, el workflow cerrará el issue y creará la siguiente misión.
 
+No cierres las misiones manualmente desde GitHub. Si un issue de misión se cierra manualmente o desde un Pull Request, el workflow **Proteger cierre de misiones** lo reabrirá y te recordará que el cierre debe hacerlo la validación automática.
+
 ## Crear ramas
 
 Crear `develop`:
