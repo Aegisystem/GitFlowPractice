@@ -9,6 +9,8 @@
 
 La práctica no requiere secretos externos. Los workflows usan `GITHUB_TOKEN`, que GitHub genera automáticamente para cada ejecución.
 
+El repositorio incluye una mini API en Express (`src/server.js`) para que el README no sea abstracto: el estudiante debe explicar cómo instalar dependencias, levantar el servidor y probar el endpoint `GET /api/estado`.
+
 ## Compartir con estudiantes
 
 Puedes compartir el enlace del repositorio y pedir una de estas opciones:
@@ -29,6 +31,7 @@ Revisa principalmente:
 - Pull Requests del hotfix hacia `main` y `develop`.
 - Tag `v1.0.0`.
 - README final con las secciones obligatorias.
+- README final explicando `npm install`, `npm start` y `GET /api/estado`.
 - Workflows ejecutados y resultados.
 
 ## Interpretar los workflows
@@ -74,6 +77,7 @@ Puedes ajustar:
 - Criterios de Git Flow en `scripts/validate-gitflow.js`.
 - Criterios de avance automático y comentarios en `scripts/validate-progress.js`.
 - Textos de issues en `scripts/practice-missions.js`.
+- Endpoint base de la práctica en `src/server.js`.
 - Documentación de entrega en `docs/instrucciones-estudiante.md`.
 
 Si tu curso usa GitHub Classroom, puedes publicar este repositorio como base de una tarea y pedir que cada estudiante active el workflow manualmente al comenzar.

@@ -40,43 +40,68 @@ El workflow cerrará este issue cuando la rama \`feature/readme-base\` exista en
     summary: "Agregarás la estructura mínima del README que documentará el proyecto durante la práctica.",
     why: "Un README bien organizado ayuda a que otras personas entiendan el repositorio y puedan usar el proyecto.",
     body: `## Objetivo
-Crear la estructura inicial del README del proyecto del estudiante.
+Crear la estructura inicial del README usando como base la mini API Express del repositorio.
 
 ## Pasos sugeridos
 - Edita \`README.md\` desde la rama \`feature/readme-base\`.
 - Reemplaza el contenido de \`README.md\` con este ejemplo.
-- Cambia los textos entre corchetes para adaptarlos a tu proyecto de curso.
+- Cambia los textos de autores y detalles de curso según corresponda.
 
 \`\`\`markdown
-# [Nombre del Proyecto]
+# Nombre del Proyecto
+
+API de Practica Git Flow
 
 ## Descripción
 
-[Explica en 3 a 5 líneas qué problema resuelve el proyecto, quién lo usaría y cuál es su objetivo principal.]
+Este proyecto es una mini API construida con Express para practicar Git Flow en una actividad guiada.
+
+La API tiene un endpoint de estado que permite comprobar que el servidor esta funcionando correctamente.
 
 ## Instalación
 
-[Describe cómo preparar el proyecto según tu caso real.]
+Requisitos:
 
-Ejemplo para un proyecto con código:
+- Node.js 20 o superior.
+- npm.
 
-1. Clonar el repositorio.
-2. Instalar las herramientas necesarias.
-3. Ejecutar los comandos de configuración.
+Pasos:
 
-Ejemplo si no requiere instalación técnica:
-
-Este proyecto no requiere instalación. Para revisarlo, abre los archivos principales del repositorio y sigue las instrucciones de la sección Uso.
+~~~bash
+git clone https://github.com/TU_USUARIO/NOMBRE_DEL_REPO.git
+cd NOMBRE_DEL_REPO
+npm install
+~~~
 
 ## Uso
 
-[Explica cómo se utiliza, ejecuta o revisa el proyecto.]
+Levantar el servidor local:
 
-Incluye pasos concretos. Por ejemplo:
+~~~bash
+npm start
+~~~
 
-1. Abrir el proyecto.
-2. Ejecutar la aplicación, prototipo o documento principal.
-3. Revisar el flujo principal de uso.
+Probar el endpoint:
+
+~~~bash
+curl http://localhost:3000/api/estado
+~~~
+
+Respuesta esperada:
+
+~~~json
+{
+  "ok": true,
+  "mensaje": "API de practica Git Flow funcionando",
+  "version": "1.0.0"
+}
+~~~
+
+Si usas navegador, abre:
+
+~~~text
+http://localhost:3000/api/estado
+~~~
 
 ## Autores
 
@@ -87,14 +112,14 @@ Incluye pasos concretos. Por ejemplo:
 
 Durante la práctica se usará Git Flow:
 
-- \`main\`: rama principal y estable.
-- \`develop\`: rama de integración.
-- \`feature/readme-base\`: rama para crear la primera versión del README.
-- \`feature/documentacion-extra\`: rama para mejorar la documentación.
-- \`release/v1.0.0\`: rama para preparar la entrega final.
-- \`hotfix/readme-typo\`: rama para corregir un error menor.
+- main: rama principal y estable.
+- develop: rama de integración.
+- feature/readme-base: rama para crear la primera versión del README.
+- feature/documentacion-extra: rama para mejorar la documentación.
+- release/v1.0.0: rama para preparar la entrega final.
+- hotfix/readme-typo: rama para corregir un error menor.
 
-La versión final se marcará con el tag \`v1.0.0\`.
+La versión final se marcará con el tag v1.0.0.
 \`\`\`
 
 - Haz commit y push de tus cambios.
@@ -196,29 +221,22 @@ El workflow cerrará este issue cuando hayas recuperado el stash, convertido el 
   {
     id: 8,
     title: "Mejorar README con instalación, uso y autores",
-    summary: "Completarás secciones prácticas del README para que el proyecto sea entendible y ejecutable.",
-    why: "La documentación útil no solo enumera títulos: guía instalación, uso y responsabilidades del equipo.",
+    summary: "Completarás el README para explicar cómo instalar, levantar y probar la API Express.",
+    why: "Documentar comandos reales reduce la fricción para que otra persona ejecute el proyecto sin adivinar pasos.",
     body: `## Objetivo
-Completar el README de acuerdo con el proyecto de curso para que una persona externa pueda entenderlo, prepararlo y usarlo.
+Completar el README para que una persona externa pueda instalar dependencias, levantar la mini API Express y probar su endpoint.
 
 ## Pasos sugeridos
 - Trabaja en \`feature/documentacion-extra\`.
-- Completa especialmente las secciones \`Instalación\`, \`Uso\` y \`Autores\` según las características reales de tu proyecto de curso.
-- En \`Instalación\`, explica lo que otra persona necesita para preparar el proyecto. Por ejemplo:
-  - requisitos previos, software o herramientas necesarias;
-  - pasos para clonar, configurar o abrir el proyecto;
-  - comandos de instalación si tu proyecto los necesita;
-  - si no hay instalación técnica, indícalo y explica cómo acceder, revisar o ejecutar la entrega.
-- En \`Uso\`, explica cómo se utiliza el proyecto. Por ejemplo:
-  - cómo iniciar la aplicación, prototipo, informe o artefacto;
-  - qué flujo principal debe seguir el usuario;
-  - ejemplos de comandos, pantallas o acciones importantes;
-  - qué resultado debería observarse al usarlo correctamente.
+- En \`Instalación\`, indica que se necesita Node.js 20 o superior y muestra el comando \`npm install\`.
+- En \`Uso\`, muestra cómo levantar la API con \`npm start\`.
+- En \`Uso\`, explica cómo probar \`GET /api/estado\` con navegador o con \`curl http://localhost:3000/api/estado\`.
+- Muestra o describe la respuesta JSON esperada del endpoint.
 - En \`Autores\`, incluye nombres de integrantes, curso, grupo o rol de cada persona si aplica.
 - Haz commit y push.
 
 ## Criterio de cierre
-El workflow cerrará este issue cuando el README explique instalación, uso y autores de forma coherente con tu proyecto de curso.`
+El workflow cerrará este issue cuando el README explique instalación, uso, endpoint y autores de forma clara.`
   },
   {
     id: 9,

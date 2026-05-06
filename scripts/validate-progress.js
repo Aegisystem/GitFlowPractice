@@ -204,15 +204,20 @@ function validateSectionQuality(markdown) {
   const installation = sectionContent(markdown, "Instalación");
   const usage = sectionContent(markdown, "Uso");
   const authors = sectionContent(markdown, "Autores");
-  const installationHasCommand = /```|`[^`]+`|\b(git clone|npm|node|pip|python|mvn|gradle|docker|cd)\b/i.test(installation);
-  const installationExplainsNoSetup = /no requiere instalaci[oó]n|no necesita instalaci[oó]n|sin instalaci[oó]n|no requiere configuraci[oó]n/i.test(installation);
-  const usageHasExample = /```|`[^`]+`|- |\b(ejemplo|comando|ejecuta|usa|abre)\b/i.test(usage);
+  const installationMentionsNode = /node\.?js|node\s+20/i.test(installation);
+  const installationHasNpmInstall = /\bnpm\s+install\b/i.test(installation);
+  const usageHasNpmStart = /\bnpm\s+(run\s+)?start\b/i.test(usage);
+  const usageMentionsEndpoint = /\/api\/estado|localhost:3000/i.test(usage);
+  const usageMentionsResponse = /json|ok|mensaje|version|versi[oó]n/i.test(usage);
 
   return [
     check(installation.length >= 40, "La sección Instalación tiene contenido suficiente", "Incluye pasos concretos de instalación."),
-    check(installationHasCommand || installationExplainsNoSetup, "Instalación incluye comandos o explica que no requiere instalación técnica", "Agrega comandos reales o explica claramente que no requiere instalación."),
+    check(installationMentionsNode, "Instalación menciona Node.js", "Indica que se necesita Node.js 20 o superior."),
+    check(installationHasNpmInstall, "Instalación incluye npm install", "Agrega el comando `npm install`."),
     check(usage.length >= 40, "La sección Uso explica cómo utilizar el proyecto", "Describe cómo ejecutar o probar el proyecto."),
-    check(usageHasExample, "Uso incluye ejemplo, comando o instrucción concreta", "Agrega un ejemplo de uso o comando."),
+    check(usageHasNpmStart, "Uso explica cómo levantar la API con npm start", "Agrega el comando `npm start`."),
+    check(usageMentionsEndpoint, "Uso menciona el endpoint /api/estado", "Explica cómo probar `http://localhost:3000/api/estado`."),
+    check(usageMentionsResponse, "Uso describe la respuesta esperada del endpoint", "Incluye o describe el JSON esperado."),
     check(authors.length >= 10 && !/reemplazar/i.test(authors), "Autores identifica a quienes trabajan el proyecto", "Reemplaza el texto pendiente por nombres reales.")
   ];
 }

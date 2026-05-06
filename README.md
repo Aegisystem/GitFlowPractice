@@ -6,11 +6,23 @@ Git Flow Practice
 
 Repositorio plantilla para una práctica guiada de Git y Git Flow en cursos universitarios de Ingeniería de Software.
 
-La práctica crea issues progresivos para que cada estudiante trabaje ramas, Pull Requests, releases, tags, hotfixes, `git stash` y documentación del proyecto.
+La práctica crea issues progresivos para que cada estudiante trabaje ramas, Pull Requests, releases, tags, hotfixes, `git stash` y documentación sobre un proyecto pequeño y ejecutable.
+
+El proyecto base incluye una mini API en Express con un endpoint:
+
+```text
+GET /api/estado
+```
 
 ## Instalación
 
-Este repositorio no requiere instalación técnica para comenzar.
+Necesitas Node.js 20 o superior.
+
+Instala las dependencias:
+
+```bash
+npm install
+```
 
 Para usarlo como estudiante:
 
@@ -18,7 +30,7 @@ Para usarlo como estudiante:
 2. Entra a la pestaña **Actions**.
 3. Espera que se ejecute **Iniciar práctica** o ejecútalo manualmente si el primer issue no aparece.
 
-Para ejecutar validaciones localmente necesitas Node.js 20 o superior:
+Para ejecutar validaciones localmente:
 
 ```bash
 npm run validate:readme
@@ -26,6 +38,28 @@ npm run validate:gitflow
 ```
 
 ## Uso
+
+Levanta la API localmente:
+
+```bash
+npm start
+```
+
+Abre el endpoint en el navegador o con `curl`:
+
+```bash
+curl http://localhost:3000/api/estado
+```
+
+La respuesta esperada es un JSON parecido a este:
+
+```json
+{
+  "ok": true,
+  "mensaje": "API de practica Git Flow funcionando",
+  "version": "1.0.0"
+}
+```
 
 El estudiante debe seguir los issues creados automáticamente en GitHub.
 
@@ -36,7 +70,7 @@ El flujo general es:
 1. Crear `develop`.
 2. Crear ramas `feature/`.
 3. Practicar `git stash`.
-4. Completar el README del proyecto de curso.
+4. Completar el README explicando cómo levantar la API.
 5. Integrar cambios con Pull Requests.
 6. Crear una rama `release/`.
 7. Crear el tag `v1.0.0`.

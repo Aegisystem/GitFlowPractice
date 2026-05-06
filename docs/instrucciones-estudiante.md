@@ -27,6 +27,23 @@ git status
 
 Si Git muestra que estás en `main` y el directorio está limpio, puedes comenzar.
 
+## Levantar la API de práctica
+
+El repositorio incluye una mini API en Express con un endpoint de estado. Instala dependencias y ejecútala localmente:
+
+```bash
+npm install
+npm start
+```
+
+Prueba el endpoint:
+
+```bash
+curl http://localhost:3000/api/estado
+```
+
+También puedes abrir `http://localhost:3000/api/estado` en el navegador.
+
 ## Ejecutar el workflow Iniciar práctica
 
 Cuando creas el repositorio desde el template, GitHub genera un commit inicial en `main`. Ese `push` inicial intenta ejecutar automáticamente el workflow **Iniciar práctica** para crear el primer issue.
@@ -160,10 +177,12 @@ El README debe tener estas secciones como encabezados reales. Los workflows revi
 ## Flujo de trabajo Git
 ```
 
-En la misión 8, completa `Instalación`, `Uso` y `Autores` según tu proyecto de curso. No inventes comandos ni dependencias si tu proyecto no los necesita.
+En la misión 8, completa `Instalación`, `Uso` y `Autores` usando la mini API Express incluida en el repositorio.
 
-- En `Instalación`, explica requisitos, herramientas, pasos de configuración o cómo acceder a la entrega.
-- En `Uso`, explica cómo se ejecuta, revisa o utiliza el proyecto y qué resultado debería verse.
+- En `Instalación`, explica que se necesita Node.js 20 o superior y muestra `npm install`.
+- En `Uso`, explica cómo levantar la API con `npm start`.
+- En `Uso`, muestra cómo probar `GET /api/estado` con navegador o `curl`.
+- En `Uso`, describe la respuesta JSON esperada.
 - En `Autores`, identifica integrantes, grupo, curso o roles si aplica.
 
 Puedes validar localmente con:
