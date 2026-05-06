@@ -98,23 +98,96 @@ Cierra este issue cuando la rama \`feature/documentacion-extra\` exista en GitHu
   },
   {
     id: 6,
+    title: "Practicar git stash antes de cambiar de contexto",
+    summary: "Guardarás cambios temporales del README sin convertirlos todavía en commit.",
+    why: "`git stash` te permite cambiar de contexto con un árbol limpio sin perder trabajo incompleto.",
+    body: `## Objetivo
+Aprender a guardar temporalmente cambios sin crear un commit.
+
+## Situación
+Imagina que empezaste a mejorar el README en \`feature/documentacion-extra\`, pero necesitas cambiar de rama o revisar algo antes de terminar. En lugar de hacer un commit incompleto, usarás \`git stash\`.
+
+## Pasos sugeridos
+- Asegúrate de estar en \`feature/documentacion-extra\`.
+- Haz un cambio pequeño en \`README.md\`, por ejemplo una nota temporal en la sección \`Uso\` o \`Instalación\`.
+- Revisa el estado con \`git status\`.
+- Guarda el cambio temporalmente con:
+
+\`\`\`bash
+git stash push -m "avance temporal documentacion extra"
+\`\`\`
+
+- Verifica que el directorio quedó limpio con \`git status\`.
+- Revisa la lista de stashes con \`git stash list\`.
+
+## Criterio de cierre
+Cierra este issue cuando puedas mostrar que el cambio quedó guardado en \`git stash list\` y que tu árbol de trabajo quedó limpio.
+
+## Evidencia sugerida
+Agrega una captura o copia de la salida de \`git stash list\` y \`git status\`.`
+  },
+  {
+    id: 7,
+    title: "Recuperar cambios guardados con git stash",
+    summary: "Recuperarás los cambios guardados y los convertirás en un commit real cuando ya estén listos.",
+    why: "Saber volver desde un stash evita perder avances y enseña la diferencia entre trabajo temporal y cambios versionados.",
+    body: `## Objetivo
+Aplicar de nuevo los cambios guardados con \`git stash\` y continuar trabajando normalmente.
+
+## Pasos sugeridos
+- Asegúrate de estar en \`feature/documentacion-extra\`.
+- Revisa los cambios guardados con \`git stash list\`.
+- Recupera el stash con:
+
+\`\`\`bash
+git stash pop
+\`\`\`
+
+- Resuelve cualquier conflicto si Git lo indica.
+- Revisa \`README.md\` y conserva el contenido que sí debe quedar en la documentación.
+- Haz commit y push cuando el cambio ya esté listo:
+
+\`\`\`bash
+git add README.md
+git commit -m "Mejora documentación del README"
+git push
+\`\`\`
+
+## Criterio de cierre
+Cierra este issue cuando hayas recuperado el stash, convertido el cambio en un commit real y publicado la rama.
+
+## Evidencia sugerida
+Incluye el hash o mensaje del commit y, si aplica, una captura de \`git stash list\` después de recuperar el cambio.`
+  },
+  {
+    id: 8,
     title: "Mejorar README con instalación, uso y autores",
     summary: "Completarás secciones prácticas del README para que el proyecto sea entendible y ejecutable.",
     why: "La documentación útil no solo enumera títulos: guía instalación, uso y responsabilidades del equipo.",
     body: `## Objetivo
-Completar el README para que una persona externa pueda entender y ejecutar el proyecto.
+Completar el README de acuerdo con el proyecto de curso para que una persona externa pueda entenderlo, prepararlo y usarlo.
 
 ## Pasos sugeridos
 - Trabaja en \`feature/documentacion-extra\`.
-- Completa especialmente las secciones \`Instalación\`, \`Uso\` y \`Autores\`.
-- Agrega comandos reales o ejemplos claros.
+- Completa especialmente las secciones \`Instalación\`, \`Uso\` y \`Autores\` según las características reales de tu proyecto de curso.
+- En \`Instalación\`, explica lo que otra persona necesita para preparar el proyecto. Por ejemplo:
+  - requisitos previos, software o herramientas necesarias;
+  - pasos para clonar, configurar o abrir el proyecto;
+  - comandos de instalación si tu proyecto los necesita;
+  - si no hay instalación técnica, indícalo y explica cómo acceder, revisar o ejecutar la entrega.
+- En \`Uso\`, explica cómo se utiliza el proyecto. Por ejemplo:
+  - cómo iniciar la aplicación, prototipo, informe o artefacto;
+  - qué flujo principal debe seguir el usuario;
+  - ejemplos de comandos, pantallas o acciones importantes;
+  - qué resultado debería observarse al usarlo correctamente.
+- En \`Autores\`, incluye nombres de integrantes, curso, grupo o rol de cada persona si aplica.
 - Haz commit y push.
 
 ## Criterio de cierre
-Cierra este issue cuando el README tenga contenido suficiente en las secciones solicitadas.`
+Cierra este issue cuando el README explique instalación, uso y autores de forma coherente con tu proyecto de curso.`
   },
   {
-    id: 7,
+    id: 9,
     title: "Crear Pull Request hacia develop",
     summary: "Integrarás la documentación extra a `develop` por medio de un Pull Request.",
     why: "La integración mediante PR permite verificar que la mejora documental no rompa reglas del repositorio.",
@@ -131,7 +204,7 @@ Integrar la documentación extra a la rama \`develop\`.
 El workflow de progreso cerrará este issue cuando detecte el Pull Request fusionado hacia \`develop\`.`
   },
   {
-    id: 8,
+    id: 10,
     title: "Crear rama release/v1.0.0",
     summary: "Crearás una rama de release para preparar la primera versión estable.",
     why: "Una rama `release/` congela la versión candidata y permite ajustes finales antes de llegar a `main`.",
@@ -148,7 +221,7 @@ Preparar una rama de release para la primera versión estable.
 Cierra este issue cuando la rama \`release/v1.0.0\` exista en GitHub.`
   },
   {
-    id: 9,
+    id: 11,
     title: "Ajustar README final para release",
     summary: "Revisarás el README final antes de llevar la versión candidata a `main`.",
     why: "La release debe salir con documentación consistente, evidencias y una explicación clara del flujo usado.",
@@ -166,7 +239,7 @@ Hacer una revisión final del README antes de liberar la versión 1.0.0.
 Cierra este issue cuando el README esté listo para ser integrado a \`main\`.`
   },
   {
-    id: 10,
+    id: 12,
     title: "Crear Pull Request de release/v1.0.0 hacia main",
     summary: "Fusionarás la rama de release hacia `main` para publicar la versión estable.",
     why: "`main` representa el estado listo para entregar; por eso solo debe recibir releases o hotfixes controlados.",
@@ -183,7 +256,7 @@ Integrar la versión candidata a la rama principal \`main\`.
 Este issue debe cerrarse al fusionar el Pull Request.`
   },
   {
-    id: 11,
+    id: 13,
     title: "Crear tag v1.0.0",
     summary: "Crearás un tag para identificar exactamente el commit de la versión 1.0.0.",
     why: "Los tags permiten ubicar y auditar versiones publicadas sin depender solo del historial de commits.",
@@ -200,7 +273,7 @@ Marcar la primera versión estable del proyecto con un tag.
 Cierra este issue cuando el tag \`v1.0.0\` exista en GitHub.`
   },
   {
-    id: 12,
+    id: 14,
     title: "Crear rama hotfix/readme-typo",
     summary: "Crearás una rama de hotfix desde `main` para simular una corrección urgente.",
     why: "Los hotfixes permiten corregir producción sin esperar el ciclo normal de features y releases.",
@@ -217,7 +290,7 @@ Simular una corrección urgente sobre la versión publicada.
 Cierra este issue cuando la rama \`hotfix/readme-typo\` exista en GitHub.`
   },
   {
-    id: 13,
+    id: 15,
     title: "Corregir un error menor del README",
     summary: "Harás una corrección pequeña y controlada en el README desde la rama de hotfix.",
     why: "Un hotfix debe ser puntual; si crece demasiado, deja de ser una corrección urgente y se vuelve otro tipo de cambio.",
@@ -233,7 +306,7 @@ Aplicar una corrección pequeña en el README desde una rama de hotfix.
 Cierra este issue cuando la corrección esté publicada en la rama de hotfix.`
   },
   {
-    id: 14,
+    id: 16,
     title: "Hacer Pull Request del hotfix hacia main y develop",
     summary: "Integrarás el hotfix en `main` y también en `develop` para mantener ambas líneas sincronizadas.",
     why: "Si el hotfix solo queda en `main`, el error puede reaparecer cuando `develop` vuelva a integrarse.",

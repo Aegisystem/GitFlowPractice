@@ -95,6 +95,28 @@ git push
 
 Usa mensajes breves, claros y en presente. Evita mezclar cambios sin relación en el mismo commit.
 
+## Guardar cambios temporales con git stash
+
+Usa `git stash` cuando tienes cambios sin terminar y necesitas limpiar el árbol de trabajo para cambiar de rama, actualizar desde remoto o revisar otra tarea sin hacer un commit incompleto.
+
+Guardar cambios temporalmente:
+
+```bash
+git status
+git stash push -m "avance temporal documentacion extra"
+git status
+git stash list
+```
+
+Recuperar el último stash:
+
+```bash
+git stash pop
+git status
+```
+
+Después de recuperar los cambios, revísalos, haz commit y publica la rama cuando el avance ya tenga sentido como parte del historial.
+
 ## Abrir Pull Requests
 
 1. En GitHub, abre la pestaña **Pull requests**.
@@ -144,6 +166,12 @@ El README debe tener estas secciones como encabezados reales. Los workflows revi
 ## Flujo de trabajo Git
 ## Evidencias
 ```
+
+En la misión 8, completa `Instalación`, `Uso` y `Autores` según tu proyecto de curso. No inventes comandos ni dependencias si tu proyecto no los necesita.
+
+- En `Instalación`, explica requisitos, herramientas, pasos de configuración o cómo acceder a la entrega.
+- En `Uso`, explica cómo se ejecuta, revisa o utiliza el proyecto y qué resultado debería verse.
+- En `Autores`, identifica integrantes, grupo, curso o roles si aplica.
 
 Puedes validar localmente con:
 
