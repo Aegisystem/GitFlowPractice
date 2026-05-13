@@ -131,6 +131,12 @@ git status
 git stash list
 ```
 
+Para que la misión 6 pueda cerrarse automáticamente, vuelve al issue de esa misión en GitHub y comenta exactamente:
+
+```text
+stash realizado
+```
+
 Recuperar el último stash:
 
 ```bash

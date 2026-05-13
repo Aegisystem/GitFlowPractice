@@ -38,7 +38,7 @@ Revisa principalmente:
 
 - **Iniciar práctica**: se ejecuta con `workflow_dispatch` y también con `push` a `main`, para que la copia creada desde template intente crear la primera misión desde el commit inicial. Si el issue ya existe, no lo duplica.
 - **Proteger cierre de misiones**: escucha issues cerrados o reabiertos. Si una misión fue cerrada manualmente o desde un Pull Request, la reabre y comenta que el cierre debe hacerlo el workflow de progreso. Si una misión ya completada fue reabierta, la vuelve a cerrar.
-- **Validar progreso de misiones**: escucha creación de ramas, pushes, Pull Requests y tags. Comenta el issue activo, cierra misiones verificables y crea la siguiente misión en el mismo job.
+- **Validar progreso de misiones**: escucha creación de ramas, pushes, Pull Requests, comentarios en issues y tags. Comenta el issue activo, cierra misiones verificables y crea la siguiente misión en el mismo job. La misión de `git stash` se cierra cuando el estudiante comenta `stash realizado`, porque el stash es local y GitHub no puede leerlo directamente.
 - **Validar README**: falla si `README.md` no tiene las secciones obligatorias.
 - **Validar Git Flow**: revisa `develop`, registro de prefijos `feature/`, `release/` y `hotfix/`, y reglas básicas de Pull Requests.
 

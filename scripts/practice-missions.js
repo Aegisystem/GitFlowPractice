@@ -184,9 +184,14 @@ git stash push -m "avance temporal documentacion extra"
 
 - Verifica que el directorio quedó limpio con \`git status\`.
 - Revisa la lista de stashes con \`git stash list\`.
+- Vuelve al issue de esta misión en GitHub y escribe un comentario con este texto exacto:
+
+\`\`\`text
+stash realizado
+\`\`\`
 
 ## Criterio de cierre
-El workflow cerrará este issue cuando corresponda avanzar a la siguiente misión.`
+El workflow cerrará este issue cuando detecte el comentario \`stash realizado\` en esta misión.`
   },
   {
     id: 7,

@@ -9,6 +9,7 @@ import {
   GitHubApi,
   listAllIssues,
   listClosedPullRequests,
+  listIssueComments,
   reopenIssue,
   upsertIssueComment
 } from "./github-api.js";
@@ -22,6 +23,9 @@ const REQUIRED_SECTIONS = [
   { level: 2, text: "Autores" },
   { level: 2, text: "Flujo de trabajo Git" }
 ];
+
+const STASH_CONFIRMATION_PATTERN = /\bstash\s+realizado\b/i;
+const ACTIONS_BOT = "github-actions[bot]";
 
 function git(args, options = {}) {
   try {
@@ -249,6 +253,28 @@ async function hasMergedPull(context, head, base) {
   return pulls.some((pull) => pull.head?.ref === head && pull.base?.ref === base && pull.merged_at);
 }
 
+function isCommentOnIssue(payload, issue) {
+  return eventName() === "issue_comment" && payload?.issue?.number === issue.number;
+}
+
+function commentConfirmsStash(commentBody = "") {
+  return STASH_CONFIRMATION_PATTERN.test(commentBody);
+}
+
+async function hasStashConfirmation(context, issue) {
+  if (isCommentOnIssue(context.payload, issue)) {
+    return commentConfirmsStash(context.payload?.comment?.body || "");
+  }
+
+  if (!context.issueComments.has(issue.number)) {
+    context.issueComments.set(issue.number, await listIssueComments(context.api, issue.number));
+  }
+
+  return context.issueComments
+    .get(issue.number)
+    .some((comment) => comment.user?.login !== ACTIONS_BOT && commentConfirmsStash(comment.body || ""));
+}
+
 async function evaluateMission(mission, issue, context) {
   const payload = context.payload;
   const branches = context.branches;
@@ -306,9 +332,10 @@ async function evaluateMission(mission, issue, context) {
       });
 
     case 6: {
+      const confirmed = await hasStashConfirmation(context, issue);
       const checks = [
-        check(refName === "feature/documentacion-extra", "El avance ocurre en feature/documentacion-extra", "Trabaja desde feature/documentacion-extra."),
-        check(branchExists(branches, "feature/documentacion-extra"), "La rama feature/documentacion-extra existe", "Crea y publica la rama feature/documentacion-extra.")
+        check(branchExists(branches, "feature/documentacion-extra"), "La rama feature/documentacion-extra existe", "Crea y publica la rama feature/documentacion-extra."),
+        check(confirmed, "Comentaste stash realizado en este issue", "Después de ejecutar `git stash push`, comenta exactamente `stash realizado` en este issue.")
       ];
 
       return result({ mission, passed: checks.every((item) => item.ok), checks });
@@ -545,6 +572,15 @@ function targetMissionIds(payload, openIssues) {
     }
   }
 
+  if (eventName() === "issue_comment") {
+    if (payload?.sender?.login === ACTIONS_BOT) {
+      return [];
+    }
+
+    const missionId = missionIdFromIssue(payload?.issue || {});
+    return missionId === 6 ? [6] : [];
+  }
+
   return [];
 }
 
@@ -624,7 +660,8 @@ async function main() {
     payload,
     issues,
     branches: listBranches(),
-    closedPulls: null
+    closedPulls: null,
+    issueComments: new Map()
   };
 
   for (const issue of openMissionIssues) {
